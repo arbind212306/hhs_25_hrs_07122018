@@ -1,0 +1,20 @@
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border: 1px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+}

@@ -1,0 +1,212 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace App\Model\Table;
+
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+use Cake\Datasource\ConnectionManager;  
+
+class UserAttendanceTable extends Table
+{
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp');
+    }
+    
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+                ->notEmpty('shift_name')
+                ->add('shift_name', [
+                'unique' => [
+                'rule' => 'validateUnique',
+                'provider' => 'table',
+                'message' => 'This shift name is already exists'
+                ]
+                ])
+            ->notEmpty('start_time')
+                
+            ->notEmpty('end_time')
+            ->notEmpty('night_shift')    
+            ;
+
+        return $validator;
+    }
+    
+    function markAttendance($data){
+        
+       
+        
+      
+        
+        
+            $empid = strtolower(trim($data['empid']));
+            $att_date = $data['att_date'];
+            
+            $shift_id= $data['shift_id'];
+            
+            $first_half = $data['first_half'];
+            $second_half = $data['second_half'];
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $company_id =  $data['company_id'];
+          
+            $conn = ConnectionManager::get('default');
+            
+            $i = 0;
+            foreach($att_date AS $adate){
+                
+                $shiftid    = $shift_id[$i];
+                $firsthalf  = $first_half[$i];
+                $secondhalf = $second_half[$i];
+
+                $q = "SELECT * FROM user_attendance WHERE att_date = '$adate' AND shift_id = '$shiftid'"
+                     . " AND lower(empid) ='$empid'";
+
+                $stmt = $conn->execute($q);
+                $res = $stmt->fetchAll('assoc');
+
+
+                 if(count($res) == 0 && $firsthalf !=0  && $secondhalf !=0){
+                  $stmt = $conn->execute('insert into user_attendance (empid,company_id,att_date,shift_id,first_half_attendance_type,second_half_attendance_type,addedon,addedby,ip) '
+                          . 'VALUES("'.$empid.'","'.$company_id.'","'.$adate.'","'.$shiftid.'","'.$firsthalf.'","'.$secondhalf.'",NOW(),"'.$empid.'","'.$ip.'")');
+                 }
+                 /*else{
+
+                     $this->Flash->error(__('Issue with marked for date .')); 
+
+                 }*/
+            
+              $i++;
+             }  
+           
+            
+            return $stmt;
+    }
+    
+    function viewAttendance($fromdate,$todate,$empid,$companyID){
+        
+        
+       $conn = ConnectionManager::get('default');
+       
+       /*$q = "SELECT a.*,b.shift_name FROM user_roster as a inner join shift_master as b on a.shift_id = b.id WHERE a.fromdate >= '$from_date' AND a.todate <= '$todate'"
+                    . " AND lower(a.empid) ='$empid'";
+					
+					
+					$q = "SELECT a.*,c.shift_name,b.shift_id ,
+	CASE 
+	WHEN b.shift_id IS NOT NULL THEN 'Marked' ELSE 'Pending' END AS AttendanceStatus
+	FROM `user_roster` AS a 
+	LEFT JOIN user_attendance AS b ON a.fromdate = b.att_date AND a.empid = b.empid
+	#LEFT JOIN user_attendance AS b ON a.empid = b.empid
+	INNER JOIN `shift_master` AS c ON a.shift_id = c.id 
+	WHERE a.company_id = '$companyID' AND a.empid= '$empid' ";*/
+       
+          $q = "CALL amsViewAttendance('$fromdate','$todate','$companyID','$empid');";
+       
+            $stmt = $conn->execute($q);
+            $res = $stmt->fetchAll('assoc');
+            
+            //echo "<pre>";
+            //print_r( $res );
+             //echo "</pre>";
+             
+             $datar= array();
+             foreach($res as $ev){
+                 
+                 
+                 if($ev['AttendanceStatus']=='Marked')
+				 {
+					 $ff = explode(',',$ev['shift_name']);
+					 if(count($ff) > 1){
+						$color= "#337ab7"; 
+					 }
+					 else if(trim($ev['shift_name']) =='Absent'){
+						 $color= "#a94442"; 
+					 }
+					 else if($ev['shift_name'] =='Week Off'){
+						 $color= "#8a6d3b"; 
+					 }
+					  else if($ev['shift_name'] =='Holiday'){
+						 $color= "#cece0b"; 
+					 } else if($ev['shift_name'] =='Business Travel'){
+						 $color= "#333"; 
+					 }
+					 else{
+						$color= "#257e4a"; 
+					 }
+					 
+                     
+				 }
+                 else
+                     $color= "#dddddd";
+                     
+                 
+                $datar[]= array('title'=>$ev['shift_name'],
+                                'start'=>$ev['fromdate'],
+                                'end'=>$ev['todate'],
+                                /*'rendering'=>'background',*/
+                                'color'=>$color
+                  
+                        
+                                ) ;
+                 
+             }
+            
+        return json_encode($datar);
+        
+    }
+    
+    
+     function pendingAttendance($fromdate,$todate,$empid,$companyID){
+        
+        
+       $conn = ConnectionManager::get('default');
+      /* $q = "SELECT a.*,c.shift_name FROM `user_roster` AS a 
+            LEFT JOIN user_attendance AS b ON a.fromdate = b.att_date
+            INNER JOIN `shift_master` AS c ON a.shift_id = c.id 
+            WHERE a.empid= '$empid' AND b.att_date IS NULL AND b.shift_id IS NULL";
+			
+			
+
+	
+	$q = "SELECT a.*,c.shift_name,
+	CASE 
+	WHEN b.shift_id IS NOT NULL THEN 'Marked' ELSE 'Pending' END AS STATUS
+	FROM `user_roster` AS a 
+	LEFT JOIN user_attendance AS b ON a.fromdate = b.att_date AND a.empid = b.empid
+	INNER JOIN `shift_master` AS c ON a.shift_id = c.id 
+	WHERE a.company_id = '$companyID' AND a.empid= '$empid' 
+	AND b.att_date IS NULL AND b.shift_id IS NULL
+	ORDER BY a.fromdate ASC";*/
+       
+       $q = "CALL amsPendingAttendance('$fromdate','$todate','$companyID','$empid');";
+       
+       
+            $stmt = $conn->execute($q);
+            $res = $stmt->fetchAll('assoc');
+      
+             return $res;
+        
+    }
+    
+    function getAttCat($company_id){
+        
+        
+            $conn = ConnectionManager::get('default');
+           $q = "SELECT * FROM attendance_category where status = '1' and company_id ='$company_id'";
+            $stmt = $conn->execute($q);
+            $res = $stmt->fetchAll('assoc');
+            
+                        
+        return $res;
+        
+    }
+    
+}
+

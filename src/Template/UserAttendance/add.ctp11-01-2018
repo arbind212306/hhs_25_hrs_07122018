@@ -1,0 +1,92 @@
+<h3>Mark Attendance</h3>
+
+<?php
+
+
+    echo $this->Form->create();
+     
+      echo $this->Form->control('company_id', ['type' => 'hidden','value'=>$this->request->session()->read('company_id')]);
+     echo $this->Form->control('empid',['type' => 'hidden','value' => $this->request->session()->read('empid')]);
+     
+      foreach($cats as $cat){
+         
+         $arrShift[$cat['id']]=$cat['name'];
+     }
+     
+      
+     ?>
+<div class="tableContainer" id="div-report"  align="center">
+            <table id="tbl-report" cellpadding="4" cellspacing="0" width="98%" style="width:100%;" border="0" class="table">  
+             <thead> 
+             
+                <tr>
+                    <!--th>S.No</th-->
+                    <th>Date</th>
+                    <th>Shift</th>
+                    <th>First Half Attendance <span class="wmand">*</span></th>
+                    <th>Second Half Attendance <span class="wmand">*</span></th>
+                </tr>
+             </thead>
+            <tbody>
+            
+           
+                 
+                 <?php 
+                 $i = 1;
+                 foreach($pendingAttendance as $pa){ ?>
+                  <tr class="row2">
+                <!--td  valign="top"><?php echo $i; ?></td-->
+                <td valign="top" ><?php echo $pa['fromdate']; 
+                  echo $this->Form->control('att_date[]', ['type' => 'hidden','value'=>$pa['fromdate'],'disabled'=>'disabled','class'=>'att_date']);
+                  ?></td>
+                <td valign="top" ><?php echo $pa['shift_name']; 
+                 echo $this->Form->control('shift_id[]', ['type' => 'hidden','value'=>$pa['shift_id'],'disabled'=>'disabled','class'=>'shift_id']);
+                 ?></td>
+                
+                <td valign="top" >
+                  <?php  echo $this->Form->input('first_half', array('name'=>'first_half[]','type'=>'select', 'options'=>$arrShift, 'label'=>'', 'empty'=>'--Select--','class'=>'first_half','disabled'=>'disabled'));
+    ?>
+                </td>
+                <td valign="top" >
+                    <?php echo $this->Form->input('second_half', array('name'=>'second_half[]','type'=>'select', 'options'=>$arrShift, 'label'=>'', 'empty'=>'--Select--','class'=>'second_half','disabled'=>'disabled')); ?>
+                </td>
+                <td valign="top" >
+                <input type="checkbox" class="chkView" style="    width: 47px;
+    display: inline-block;"/>
+                  </td>
+                   </tr>    
+                 <?php 
+                 
+                 $i++;
+                 } ?>
+         
+      
+            </tbody>
+            </table>
+</div>
+  <?php 
+    
+    
+    
+    
+    echo $this->Form->button(__('Mark Attendance'));
+    echo $this->Form->end();
+
+  ?>
+
+<script>
+    $(document).on('change', '.chkView', function() {
+        
+        
+        if($(this).is(':checked'))
+        {
+        $(this).closest('tr').find('.first_half, .second_half,.shift_id,.att_date').prop('disabled', false);
+        
+        }
+        else{
+            
+           $(this).closest('tr').find('.first_half, .second_half,.shift_id,.att_date').prop('disabled', true); 
+        }
+        
+});
+</script>

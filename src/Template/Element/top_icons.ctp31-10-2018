@@ -1,0 +1,25 @@
+<div class="row RowColor-1" id="rightColumn">
+    <div class="TopButton nomargin col-sm-12 col-md-12 col-lg-12 col-xs-12">
+        <div class="ThirdToolRow">
+            <a href="OrganizationalStructureTransactions.html">
+                <?php
+                echo $this->Html->image('SideBarIcons/transaction.png', ['class' => 'ThirdToolImageAlign hvr-grow']);
+                ?>
+                <p class="square_btn_text">Transactions</p></a>
+        </div>
+        <div class="ThirdToolRow ThirdToolRowSelected">
+            <a href="OrganizationalStructureControls.html" >
+                <?php
+                echo $this->Html->image('SideBarIcons/controls.png', ['class' => 'ThirdToolImageAlign']);
+                ?>
+                <p class="square_btn_text">Controls</p></a>
+        </div>
+        <div class="ThirdToolRow">
+            <a href="OrganizationalStructureReports.html" >
+                <?php
+                echo $this->Html->image('SideBarIcons/reports.png', ['class' => 'ThirdToolImageAlign hvr-grow']);
+                ?>
+                <p class="square_btn_text">Reports</p></a>
+        </div>
+    </div> 
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <?php
+    echo $this->element('header');
+    ?>
+    <body>
+        <div ng-app="myApp" ng-controller="myCtrl">
+            <?php
+            echo $this->element('top_user_info');
+            echo $this->element('top_search');
+            ?>
+            <!-- Third Row starts -->
+            <div class="row nomargin">
+                <?php
+                echo $this->element('left_navigation');
+                echo $this->element('top_icons');
+                ?>
+                <div class="row CenterCointainerStyle" id="rightColumn1">
+                    <?php
+                    echo $this->element('page_menus');
+                    ?>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xs-8 RoundedDiv nopadding" id="centerDiv">
+                        <div class="row nomargin box">
+                            <?= $this->fetch('content') ?>
+                            <?php
+                            echo $this->Html->image('SideBarIcons/LeftArrowblue.png', ['class' => 'float-right toprightarrow', 'ng-show' => '!showInfo', 'ng-click' => 'showInformation()']);
+                            echo $this->Html->image('SideBarIcons/RightArrowblue.png', ['class' => 'float-right toprightarrow', 'ng-show' => 'showInfo', 'ng-click' => 'showInformation()']);
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                    echo $this->element('right');
+                    ?>
+                </div>
+            </div>
+        </div>
+        <?php
+        echo $this->element('footer');
+        ?>
+    </body>
+</html>

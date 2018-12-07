@@ -1,0 +1,182 @@
+html, body {
+    
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    background: #fff;
+}
+
+.login-bg {
+    background: url("../images/login-bg.jpg") center center no-repeat;
+    background-size: cover;
+}
+
+.login-bg .login-logo {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.center-outer {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.center-inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0 30px;
+}
+
+.center-content {
+    display: inline-block;
+    text-align: left;
+    background: #fff;
+    padding: 48px 40px 36px;
+}
+
+.box-shadow {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+.login-box {
+    width: 50%;
+    min-width: 300px;
+    max-width: 450px;
+    border-radius: 8px;
+}
+
+.overflow-scroll {
+    overflow: scroll;
+}
+
+select.input-sm {
+    height: auto;
+    line-height: 17px;
+}
+
+.dataTables_filter {
+    text-align: right;
+}
+
+.dataTables_filter input {
+    margin-left: 10px;
+}
+
+.jqstooltip {
+    height: auto !important;
+    width: auto !important;
+}
+
+.dashed-border {
+    border: 1px dashed #ccc;
+}
+
+.w-200 {
+    width: 200px;
+}
+
+.h-200 {
+    height: 200px;
+}
+
+table.dataTable thead .sorting_asc {
+    background-image: url("https://cdn.datatables.net/1.10.19/images/sort_asc.png");
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url("https://cdn.datatables.net/1.10.19/images/sort_desc.png");
+}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+table.dataTable thead .sorting {
+    background-image : url("https://cdn.datatables.net/1.10.19/images/sort_both.png");
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+span.multiselect-native-select {
+    position: relative
+}
+span.multiselect-native-select select {
+    border: 0!important;
+    clip: rect(0 0 0 0)!important;
+    height: 1px!important;
+    margin: -1px -1px -1px -3px!important;
+    overflow: hidden!important;
+    padding: 0!important;
+    position: absolute!important;
+    width: 1px!important;
+    left: 50%;
+    top: 30px
+}
+.multiselect-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+.multiselect-container .input-group {
+    margin: 5px
+}
+.multiselect-container>li {
+    padding: 0
+}
+.multiselect-container>li>a.multiselect-all label {
+    font-weight: 700
+}
+.multiselect-container>li.multiselect-group label {
+    margin: 0;
+    padding: 3px 20px 3px 20px;
+    height: 100%;
+    font-weight: 700
+}
+.multiselect-container>li.multiselect-group-clickable label {
+    cursor: pointer
+}
+.multiselect-container.dropdown-menu > li > a {
+    padding: 0
+}
+.multiselect-container>li>a>label {
+    margin: 0;
+    height: 100%;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 10px 40px;
+}
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+    margin: 0
+}
+.multiselect-container>li>a>label>input[type=checkbox] {
+    margin-bottom: 5px
+}
+.btn-group>.btn-group:nth-child(2)>.multiselect.btn {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+}
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+    padding: 3px 20px 3px 40px
+}
+.form-inline .multiselect-container li a label.checkbox input[type=checkbox], .form-inline .multiselect-container li a label.radio input[type=radio] {
+    margin-left: -20px;
+    margin-right: 0
+}
+
+.open > .dropdown-menu {
+    width: 100%;
+}
+
+.font-size-20 {
+    font-size: 18px;
+}
+#content_wrapper_section{min-height:862.875px!important;}

@@ -1,0 +1,111 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+.leftAnalyticsReports h5{text-align: left;margin-left: 15px;}  
+.rightAnalyticsReports h5{text-align: left;margin-left: 15px;} 
+.leftAnalyticsReports .leftBoxes{width: 63%;display: flex;}
+.rightAnalyticsReports .rightBoxes{width: 63%;display: flex;}
+.leftbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+}
+.rightbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+.leftAnalyticsReports h5{text-align: left;margin-left: 15px;}  
+.rightAnalyticsReports h5{text-align: left;margin-left: 15px;} 
+.leftAnalyticsReports .leftBoxes{width: 63%;display: flex;} 
+.rightAnalyticsReports .rightBoxes{width: 63%;display: flex;}
+.leftbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+}
+.rightbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+.leftAnalyticsReports h5{text-align:center;}  
+.rightAnalyticsReports h5{text-align:center;}
+.leftAnalyticsReports .leftBoxes {width: 100%;display: flex;}
+.rightAnalyticsReports .rightBoxes {width: 100%;display: flex;} 
+.leftbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+} 
+.leftbox .innerBox .number h6{text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -12px;
+    height: 17px;
+}
+.rightbox .innerBox .number h6 {
+    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+    height: 12px;
+}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+.leftAnalyticsReports h5{text-align:center;}  
+.rightAnalyticsReports h5{text-align:center;}  
+.leftAnalyticsReports .leftBoxes {width: 100%;display: flex;}  
+.rightAnalyticsReports .rightBoxes {width: 100%;display: flex;}  
+.leftbox .innerBox .number h6{text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -12px;
+    height: 17px;
+}
+.rightbox .innerBox .number h6{text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -12px;
+    height: 17px;
+}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+.leftAnalyticsReports h5{text-align:center;}  
+.rightAnalyticsReports h5{text-align:center;}  
+.leftAnalyticsReports .leftBoxes {width: 100%;display: flex;}  
+.rightAnalyticsReports .rightBoxes {width: 100%;display: flex;} 
+.leftbox .innerBox .number h6{text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -12px;
+    height: 17px;
+}
+.rightbox .innerBox .number h6{    text-align: right;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -13px;
+    height: 19px;    margin-left: 41px;
+}  
+}

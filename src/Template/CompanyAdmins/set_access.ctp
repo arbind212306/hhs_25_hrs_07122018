@@ -1,0 +1,96 @@
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: #763240 !important;
+        border-color: #763240 !important;
+    }
+</style>
+<?= $this->Flash->render() ?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="well well-sm">
+            <?php
+            //pr($userRight);die;
+            echo $this->Form->create('');
+            if (empty($new)) {
+                $userObj = $userRight['employee'];
+                $text1 = 'Edit';
+                echo $this->Form->input('u_right_id', ['value' => $userRight['id'], 'type' => 'hidden']);
+            } else {
+                $userObj = $user;
+                $text1 = 'Add';
+                echo $this->Form->input('u_id', ['value' => $user['id'], 'type' => 'hidden']);
+            }
+            ?>
+
+            <fieldset>
+                <legend class="text-center"><?= $text1; ?> access for <?= $userObj['first_name'] . "  (" . $userObj['emp_id'] . ")" ?></legend>
+                <?php
+                if (!empty($menu)) {
+					
+					/*echo "<pre>";
+					print_r($menu);
+				   echo "</pre>";*/
+                    foreach ($menu as $parent) {
+                        echo '<div class="form-group">';
+                        ?>
+                        <div class="col-md-3">
+                            <label class="col-md-2 control-label"><?= $parent['name']; ?></label>
+                        </div>
+                        <div class="col-md-9" style="border: 1px solid #e3e3e3;">
+                            <div class="form-group">
+                                <?php
+                                if (!empty($parent['children'])) {
+                                    foreach ($parent['children'] as $child) {
+                                        $checked = "";
+                                        if ($child['allowed']) {
+                                            $checked = "checked";
+                                        }
+                                        ?>
+                                        <div class="col-md-3"><p style="padding-top: 10%;"><?= $child['name']; ?></p></div>
+                                        <div class="col-md-1">
+                                            <input style = '    margin: 18px 0 0;' class="form-control1" <?= $checked; ?> name="menu[]" type="checkbox" value="<?= $child['id']; ?>">
+                                        </div>
+                                        <?php
+                                    }
+                                }else{
+									
+									$checked = "";
+                                        if ($parent['allowed']) {
+                                            $checked = "checked";
+                                        }
+										
+										
+									?>
+                                        <div class="col-md-3"><p style="padding-top: 10%;"><?= $parent['name']; ?></p></div>
+                                        <div class="col-md-1">
+                                            <input style = '    margin: 18px 0 0;' class="form-control1" <?= $checked; ?> name="menu[]" type="checkbox" value="<?= $parent['id']; ?>">
+                                        </div>
+                                        <?php
+									
+								}
+                                ?>
+                            </div>
+                        </div>    
+                        <?php
+                        echo '</div>';
+                    }
+                }
+                ?>
+
+                <!-- Form actions -->
+                <div class="form-group">
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <?php
+                        echo $this->Html->link('<button type="button" class="btn btn-primary">Cancel</button>', ['controller' => 'CompanyAdmins', 'action' => 'access-map'], ['escape' => false]);
+                        ?>                        
+                    </div>
+                </div>
+            </fieldset>
+            <?php
+            echo $this->Form->end();
+            ?>
+        </div>
+    </div>
+</div>

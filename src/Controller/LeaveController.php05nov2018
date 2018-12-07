@@ -1,0 +1,139 @@
+<?php
+
+// src/Controller/ShiftmasterController.php
+
+namespace App\Controller;
+
+
+
+class LeaveController extends AppController
+{
+    
+    public function index()
+    {
+        $this->loadComponent('Paginator');
+        //$roster = $this->Paginator->paginate($this->Leave->find());
+        //$this->set(compact('rosters'));
+        
+        $from_date = date('Y-m-01');
+                
+        $todate = date('Y-m-t');
+        
+         $empid =  strtolower($this->request->session()->read('empid'));
+         $companyID =  $this->request->session()->read('company_id');
+        //$empid = 't-546';
+                
+       /* $roster = $this->Leave->viewRoster($from_date,$todate,$empid);*/
+        
+        $leaves = $this->Leave->viewLeave($from_date,$todate,$empid,$companyID);
+		  $leavesb = $this->Leave->getLeaveBalance($companyID,$empid);
+       
+        $this->set('leavesb', $leavesb);
+        $this->set('leaves', $leaves);
+        
+        
+        
+        $this->set('leaves', $leaves);
+        
+        
+    }
+    
+    public function view($id = null)
+    {
+     
+       $roster = $this->Leave->find('list', 
+                   array('conditions'=>array('id'=>$id)));
+          
+       $roster =  $this->Leave->get($id);
+             
+        $this->set(compact('shift'));
+    }
+    
+    
+    public function edit($id)
+{
+     $roster =  $this->Leave->get($id);
+     
+       $companyID =  $this->request->session()->read('company_id');
+       $shifts =  $this->Leave->getLeaveType($companyID);
+       
+        $this->set('shifts', $shifts);
+        
+    if ($this->request->is(['post', 'put'])) {
+        $this->Leave->patchEntity($roster, $this->request->getData());
+        if ($this->Leave->save($roster)) {
+            $this->Flash->success(__('Shift has been updated.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to update shift.'));
+    }
+
+    $this->set('roster', $roster);
+}
+
+public function add()
+    {
+        $roster = $this->Leave->newEntity();
+        
+        $companyID =  $this->request->session()->read('company_id');
+        $ltypes =  $this->Leave->getLeaveType($companyID);
+       
+        $this->set('ltypes', $ltypes);
+        
+        if ($this->request->is('post')) {
+            //$roster = $this->Leave->patchEntity($ltypes, $this->request->getData());
+
+            $data = $this->request->getData();
+            
+            $stmt =  $this->Leave->saveLeaveRequest($data);
+         
+            // Hardcoding the user_id is temporary, and will be removed later
+            // when we build authentication out.
+            //$roster->user_id = 1;
+
+            /*if ($this->Leave->save($roster)) {*/
+                
+				$error_flag = $stmt[0]['error_flag'];
+            
+			if ($error_flag == 0) {
+               
+                $this->Flash->success(__($stmt[0]['msg']));
+                return $this->redirect(['action' => 'index']);
+            }
+			else{
+				
+				$this->Flash->error(__($stmt[0]['msg']));
+				
+			}
+			
+			
+            
+        }
+        $this->set('roster', $roster);
+    }
+    
+       public function delete($id)
+        {
+            $this->request->allowMethod(['post', 'delete']);
+
+            //$article = $this->Shiftcategory->findBySlug($slug)->firstOrFail();
+            $roster =  $this->Leave->get($id);
+            if ($this->Leave->delete($roster)) {
+                $this->Flash->success(__('The {0} article has been deleted.', $roster->name));
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+		
+		 function getreport(){
+        
+		
+		    ///pr($this->request->getData());
+		
+		   pr($_REQUEST);
+        
+            //$leaver = $this->Leave->viewLeave($from_date,$todate,$empid,$companyID);            
+         
+             //$this->set('leaver', $leaver);
+          }
+
+}

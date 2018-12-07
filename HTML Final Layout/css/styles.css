@@ -1,0 +1,140 @@
+
+/* Login Css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body  { margin:0px; padding:0px;font-family:arial;}
+img, ul, ol, li, span, table  { border:none; margin:0px; padding:0px; }
+video { width: 100%; height: auto; }
+video { max-width: 100%; height: auto; }
+html, body {
+  height: 100%;
+  background-size: cover;
+  background-image: url(Login_BG_page.png);
+  background-repeat: no-repeat;
+  font-family: "arial";
+  color: white;
+}
+
+.preload * {
+  transition: none !important;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: small;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  margin-bottom: 0.35em;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  border: none;
+  padding: 0.5em;
+  border-radius: 2px;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: none;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+button {margin-top: 0px;
+    padding-left: 13px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-top: 4px;
+  border: none;
+  border-radius: 2px;
+  background-color: #f05f3e;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+  color: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+small {
+  font-size: 1em;
+}
+
+.login--login-submit {
+  float: left;
+}
+
+.login--container {
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+  top: 40%;
+}
+
+.login--toggle-container {
+  position: absolute;
+    top: 15px;
+    background-color: #00b0b0;
+    padding: 20px 30px;
+    line-height: 2.5em;
+    width: 50%;
+    height: 93px;
+    text-align: left;
+    cursor: pointer;
+    transform: perspective(1000px) translateZ(1px);
+    transform-origin: 0% 0%;
+    transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+    backface-visibility: hidden;
+	border-bottom-left-radius: 11px;
+    border-top-left-radius: 9px;
+}
+.login--toggle-container .js-toggle-login {
+  font-size: 4em;
+  text-decoration: underline;
+}
+.login--active .login--toggle-container {
+  transform: perspective(1000px) rotateY(180deg);
+}
+
+.login--username-container, .login--password-container {
+     float: right;    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: #00a6af;
+    width: 50%;
+    height: 92px;
+    padding: 0.5em;
+    margin-top: 16px;
+}
+
+.login--password-container {
+  transform-origin: 0% 100%;
+  transform: perspective(1000px) rotateY(-180deg);
+  transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+  background-color: #bc1012;
+  backface-visibility: hidden;
+}
+.login--active .login--password-container {
+  transform: perspective(1000px) rotateY(0deg);
+  background-color: #00a6af;
+}
+
+.forgotPass{font-family: "Roboto Slab", serif;
+    color: #ffffff;cursor:pointer;float: right;margin-top: 7px;}
+	
+.forgotPass:hover{font-family: "Roboto Slab", serif;
+    color: #ffffff;cursor:pointer;text-decoration:underline;}
+	
+.login_left_section{
+    width: 400px;
+    height: 300px;
+    top: 150px;
+    position: absolute;
+    float: left;}	
+.login--container{
+    float: left;
+    top: 252px;
+    left: 416px;
+}	
+.login--login-submit a{color:#FFFFFF;font-size:13px;text-decoration:none;}
+/* Login Css end here....*/

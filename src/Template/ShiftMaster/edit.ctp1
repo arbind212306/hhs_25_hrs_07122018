@@ -1,0 +1,48 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
+<!-- File: src/Template/Articles/edit.ctp -->
+
+<h1>Edit shift</h1>
+<?php
+     echo $this->Form->create($shift);
+     echo $this->Form->control('id', ['type' => 'hidden']);
+     echo $this->Form->control('shift_name',array('class'=>'form-control'));
+     echo $this->Form->control('start_time',array('class'=>'form-control'));
+     echo $this->Form->control('end_time',array('class'=>'form-control'));
+    // echo $this->Form->control('night_shift');
+       
+       foreach($categorys as $cat){
+         
+         $arrCategory[$cat['id']]=$cat['name'];
+     }
+     
+     foreach($regularization as $reg){
+         
+         $arrregularization[$reg['id']]=$reg['name'];
+     }
+     
+    // $arrCategory=array(1=>"Car",2=>"Boat",3=>"Bike");
+     //$arrregularization=array(1=>"Car",2=>"Boat",3=>"Bike");
+     
+     echo $this->Form->input('shift_category', array('type'=>'select', 'options'=> $arrCategory, 'label'=>false, 'empty'=>'Select Category','class'=>'form-control')); 
+     echo $this->Form->input('regularization', array('type'=>'select', 'options'=>$arrregularization, 'label'=>false, 'empty'=>'Select regularization','class'=>'form-control'));    
+     
+     
+     
+    $night_shift= [['value'=>'0','text'=>'No'],['value'=>'1','text'=>'Yes']]; 
+
+    echo $this->Form->input('night_shift', array(
+                      'options' => $night_shift,
+                      'type' => 'radio'
+                      ));
+    
+    
+    echo $this->Form->button(__('Save'));
+    echo $this->Form->end();
+?>
